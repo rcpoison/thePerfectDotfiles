@@ -1,0 +1,12 @@
+build
+dist
+nbproject/private
+*~
+*.bak*
+*.log
+*.bz2
+*.gz
+*.nbm
+.googlecode
+.passwd
+code.google
