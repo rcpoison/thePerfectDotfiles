@@ -127,7 +127,7 @@ if [ -x /usr/bin/colorsvn ]; then
 fi
 
 ## other
-alias back='cd "$OLDPWD"'
+alias back='cd -'
 
 if [ -x /usr/bin/yaourt ]; then
 	alias pkgup='yaourt -Syu '
