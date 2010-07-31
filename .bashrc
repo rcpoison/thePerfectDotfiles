@@ -91,15 +91,32 @@ function cprompt() {
 	local bakwht="\[\033[47m\]"   # White
 	local txtrst="\[\033[0m\]"    # Text Reset
 
+
+	local gitPrompt
+	local gitStatus
+	gitStatus=$(git status 2>/dev/null)
+	#echo $?
+	if [ $? -eq 0 ]; then
+		local gitClean
+		local gitBranch=$(head -n1<<<"$gitStatus"|awk '{print $NF}')
+		if [ $(tail -n1 <<< "$gitStatus"|grep -c 'nothing to commit (working directory clean)') == "0" ]; then
+			gitClean="⚡"
+		else
+			gitClean=""
+		fi
+		
+		local gitPrompt=" $txtcyn[$gitBranch$bldylw$gitClean$txtcyn]"
+	fi
+	
 	if [ -w . ]; then
 		local DIR_COLOR="$bldwht"
 	else
 		local DIR_COLOR="$bakylw$bldblk"
 	fi
 	if [ $UID -eq 0 ]; then
-		export PS1="${txtwht}[\A]${bldwht}[${bldred}\u${bldwht}@${txtylw}\h${bldwht}:${DIR_COLOR}\w${txtrst}${bldwht}]${bldred}# ${txtrst}"
+		export PS1="${txtwht}[\A]${bldwht}[${bldred}\u${bldwht}@${txtylw}\h${bldwht}:${DIR_COLOR}\w${txtrst}${bldwht}]${gitPrompt}${bldred}# ${txtrst}"
 	else
-		export PS1="${txtwht}[\A]${bldwht}[${txtblu}\u${bldwht}@${txtylw}\h${bldwht}:${DIR_COLOR}\w${txtrst}${bldwht}]${txtgrn}\$ ${txtrst}"
+		export PS1="${txtwht}[\A]${bldwht}[${txtblu}\u${bldwht}@${txtylw}\h${bldwht}:${DIR_COLOR}\w${txtrst}${bldwht}]${gitPrompt}${txtgrn}\$ ${txtrst}"
 	fi
 }
 
