@@ -99,7 +99,7 @@ function cprompt() {
 	if [ $? -eq 0 ]; then
 		local gitClean
 		local gitBranch=$(head -n1<<<"$gitStatus"|awk '{print $NF}')
-		if [ $(tail -n1 <<< "$gitStatus"|grep -c 'nothing to commit (working directory clean)') == "0" ]; then
+		if [ $(tail -n1 <<< "$gitStatus"|grep -c 'nothing to commit (working directory clean)' 2>/dev/null) == "0" ]; then
 			gitClean="⚡"
 		else
 			gitClean=""
