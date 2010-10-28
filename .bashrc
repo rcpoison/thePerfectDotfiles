@@ -93,19 +93,19 @@ function __cprompt() {
 
 
 	local gitPrompt
-	local gitStatus
-	gitStatus=$(git status 2>/dev/null)
+	local gitBranch
+	gitBranch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
 	#echo $?
 	if [ $? -eq 0 ]; then
 		local gitClean
-		local gitBranch=$(head -n1<<<"$gitStatus"|awk '{print $NF}')
-		if [ $(tail -n1 <<< "$gitStatus"|grep -c 'nothing to commit (working directory clean)' 2>/dev/null) == "0" ]; then
-			gitClean="⚡"
+		git diff --no-ext-diff --quiet --exit-code 2>/dev/null || gitClean="⚡"
+		if git rev-parse --quiet --verify HEAD >/dev/null; then
+			git diff-index --cached --quiet HEAD -- || i="+"
 		else
-			gitClean=""
+			i="#"
 		fi
 		
-		local gitPrompt=" $txtcyn[$gitBranch$bldylw$gitClean$txtcyn]"
+		gitPrompt=" $txtcyn[$gitBranch$bldylw$gitClean$txtcyn]"
 	fi
 	
 	if [ -w . ]; then
