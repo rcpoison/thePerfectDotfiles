@@ -253,3 +253,7 @@ function rcreload() {
 		sudo /etc/rc.d/$arg reload
 	done
 }
+
+[ -f ~/git-completion.bash ] && . ~/git-completion.bash
+
+
