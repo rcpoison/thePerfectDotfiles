@@ -54,7 +54,7 @@ export bakcyn='\e[46m'   # Cyan
 export bakwht='\e[47m'   # White
 export txtrst='\e[0m'    # Text Reset
 
-function cprompt() {
+function __cprompt() {
 	## http://wiki.archlinux.org/index.php/Color_Bash_Prompt
 	#me no understand why promt different escapes for colors? me stupid :(
 	local txtblk="\[\033[0;30m\]" # Black - Regular
@@ -121,12 +121,12 @@ function cprompt() {
 }
 
 
-function prompt_command () {
-	cprompt
+function __prompt_command () {
+	__cprompt
 	history -a
 }
 
-export PROMPT_COMMAND='prompt_command'
+export PROMPT_COMMAND='__prompt_command'
 
 
 ## colors!
