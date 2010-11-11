@@ -98,14 +98,14 @@ function __cprompt() {
 	#echo $?
 	if [ $? -eq 0 ]; then
 		local gitClean
+		local gitStaged
+		# ⚙⩲★⚕
 		git diff --no-ext-diff --quiet --exit-code 2>/dev/null || gitClean="⚡"
 		if git rev-parse --quiet --verify HEAD >/dev/null; then
-			git diff-index --cached --quiet HEAD -- || i="+"
-		else
-			i="#"
+			git diff-index --cached --quiet HEAD -- || gitStaged="★"
 		fi
 		
-		gitPrompt=" $txtcyn[$gitBranch$bldylw$gitClean$txtcyn]"
+		gitPrompt=" $txtcyn[$gitBranch$bldred$gitStaged$bldylw$gitClean$txtcyn]"
 	fi
 	
 	if [ -w . ]; then
