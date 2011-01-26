@@ -131,7 +131,7 @@ export PROMPT_COMMAND='__prompt_command'
 
 ## colors!
 alias grep='grep --color=auto '
-alias ls='ls --color=auto '
+alias ls='ls --color=auto'
 eval $(dircolors -b)
 if [ -x /usr/bin/colordiff ]; then
 	alias diff='colordiff '
@@ -139,8 +139,8 @@ fi
 if [ -x /usr/bin/pacman-color ]; then
 	alias pacman='/usr/bin/pacman-color '
 fi
-if [ -x /usr/bin/colorsvn ]; then
-	alias svn='/usr/bin/colorsvn '
+if [ -x /usr/biny/colorsvn ]; then
+	alias svn='/usr/bin/colorsvn'
 fi
 
 ## other
