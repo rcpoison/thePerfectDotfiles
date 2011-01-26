@@ -221,12 +221,12 @@ function pastebin() {
 	echo
 }
 
-function imagebin() {
-echo "$1"
-	curl -F nickname="$USER" -F image=@"$1" -F title= -F description= -F disclaimer_agree=Y -F Submit=Submit -F mode=add http://imagebin.org/index.php #|grep -P '^Location:'
-	echo
-	#curl --verbose -F name="$USER" -F f=@temp.jpeg   -F sfile=Upload http://imagebin.ca/upload.php
-}
+#function imagebin() {
+#echo "$1"
+#	curl -F nickname="$USER" -F image=@"$1" -F title= -F description= -F disclaimer_agree=Y -F Submit=Submit -F mode=add http://imagebin.org/index.php #|grep -P '^Location:'
+#	echo
+#	#curl --verbose -F name="$USER" -F f=@temp.jpeg   -F sfile=Upload http://imagebin.ca/upload.php
+#}
 
 ## archlinux
 function rcstart() {
