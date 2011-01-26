@@ -1,0 +1,17 @@
+
+[core]
+	pager = less -R
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+[alias]
+	co = checkout
+	dl = log -p --stat
+	sl = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	up = svn rebase
+	k = !sh -c '(git diff $@|kompare - &) &> /dev/null' -
+	s = status
+	ls-ignored = ls-files --others -i --exclude-standard
+[diff]
+	guitool = kompare
