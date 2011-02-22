@@ -106,6 +106,10 @@ function __cprompt() {
 		fi
 		
 		gitPrompt=" $txtcyn[$gitBranch$bldred$gitStaged$bldylw$gitClean$txtcyn]"
+		
+		if [ -n "$TMUX" ]; then
+			tmux set -g status-right "#[fg=yellow]$gitBranch $gitStaged$gitClean"
+		fi
 	fi
 	
 	if [ -w . ]; then
