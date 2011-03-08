@@ -133,13 +133,37 @@ export PROMPT_COMMAND='__prompt_command'
 alias grep='grep --color=auto'
 alias ls='ls --color=auto'
 eval $(dircolors -b)
-if [ -x /usr/bin/colordiff ]; then
-	alias diff='colordiff'
-fi
-if [ -x /usr/biny/colorsvn ]; then
-	alias svn='/usr/bin/colorsvn'
-fi
-
+[ -x /usr/bin/colordiff ] && alias diff='colordiff'
+[ -x /usr/bin/colorsvn ] && alias svn='/usr/bin/colorsvn'
+[ -x ~/lesspipe.sh ] && export LESSOPEN="|~/lesspipe.sh %s"
+export LESS=' -R'
+function _less_alias_function () {
+	if [ -x /usr/bin/source-highlight ]; then
+		case "$1" in
+		*ChangeLog|*changelog )
+			/usr/bin/source-highlight --failsafe -f esc --lang-def=changelog.lang --style-file=esc.style -i "$1"|less
+			;;
+		*Makefile|*makefile )
+			/usr/bin/source-highlight --failsafe -f esc --lang-def=makefile.lang --style-file=esc.style -i "$1"|less
+			;;
+		*.[ch]|*.cpp|*.hpp|*.java|*.pl|*.php|*.html|*.xhtml|*.js|*.xml|*.xsl|*.xslt|*.sh|*.bashrc|*.sql|*.patch  )
+			source-highlight --failsafe --infer-lang -f esc --style-file=esc.style -i "$1"|less
+			;;
+		* ) # TODO: check for mimetype with file -ib and use source-highlight too
+			if [ -x /usr/bin/lesspipe.sh ]; then
+				/usr/bin/lesspipe.sh "$1"|less
+			else
+				less "$1"
+			fi
+			;;
+		esac
+	elif [ -x /usr/bin/lesspipe.sh ]; then
+		/usr/bin/lesspipe.sh "$1"|less
+	else
+		less "$1"
+	fi
+}
+alias less="_less_alias_function"
 ## other
 alias back='cd -'
 
