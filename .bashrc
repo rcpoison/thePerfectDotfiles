@@ -105,13 +105,13 @@ function __cprompt() {
 			git diff-index --cached --quiet HEAD -- || gitStaged="★"
 		fi
 		
-		gitPrompt=" $txtcyn[$gitBranch$bldred$gitStaged$bldylw$gitClean$txtcyn]"
+		gitPrompt=" ${txtcyn}[${gitBranch}${bldred}${gitStaged}${bldylw}${gitClean}${txtcyn}]"
 	fi
 	
 	if [ -w . ]; then
-		local DIR_COLOR="$bldwht"
+		local DIR_COLOR="${bldwht}"
 	else
-		local DIR_COLOR="$bakylw$bldblk"
+		local DIR_COLOR="${bakylw}${bldblk}"
 	fi
 	if [ $UID -eq 0 ]; then
 		export PS1="${txtwht}[\A]${bldwht}[${bldred}\u${bldwht}@${txtylw}\h${bldwht}:${DIR_COLOR}\w${txtrst}${bldwht}]${gitPrompt}${bldred}# ${txtrst}"
@@ -130,14 +130,11 @@ export PROMPT_COMMAND='__prompt_command'
 
 
 ## colors!
-alias grep='grep --color=auto '
+alias grep='grep --color=auto'
 alias ls='ls --color=auto'
 eval $(dircolors -b)
 if [ -x /usr/bin/colordiff ]; then
-	alias diff='colordiff '
-fi
-if [ -x /usr/bin/pacman-color ]; then
-	alias pacman='/usr/bin/pacman-color '
+	alias diff='colordiff'
 fi
 if [ -x /usr/biny/colorsvn ]; then
 	alias svn='/usr/bin/colorsvn'
@@ -146,13 +143,7 @@ fi
 ## other
 alias back='cd -'
 
-if [ -x /usr/bin/yaourt ]; then
-	alias pkgup='yaourt -Syu '
-	alias pkgf='yaourt -Ss '
-else
-	alias pkgup='pacman -Syu '
-	alias pkgf='pacman -Ss '
-fi
+
 # has stupid extra output
 #if [ -x /usr/bin/colortail ]; then
 #	alias tail='/usr/bin/colortail '
@@ -228,32 +219,7 @@ function pastebin() {
 #	#curl --verbose -F name="$USER" -F f=@temp.jpeg   -F sfile=Upload http://imagebin.ca/upload.php
 #}
 
-## archlinux
-function rcstart() {
-	local arg
-	for arg in $*; do
-		sudo /etc/rc.d/$arg start
-	done
-}
-function rcstop() {
-	local arg
-	for arg in $*; do
-		sudo /etc/rc.d/$arg stop
-	done
-}
-function rcrestart() {
-	local arg
-	for arg in $*; do
-		sudo /etc/rc.d/$arg restart
-	done
-}
-function rcreload() {
-	local arg
-	for arg in $*; do
-		sudo /etc/rc.d/$arg reload
-	done
-}
 
+[ -f /etc/arch-release ] && . ~/.bashrc-archlinux
 [ -f ~/git-completion.bash ] && . ~/git-completion.bash
-
 
