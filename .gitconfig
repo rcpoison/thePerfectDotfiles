@@ -8,12 +8,12 @@
 [alias]
 	co = checkout
 	dl = log -p --stat
-	sl = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	sl = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%an <%ae>%Creset' --abbrev-commit --date=relative
 	up = svn rebase
 	k = !sh -c '(git diff $@|kompare - &) &> /dev/null' -
 	s = status
 	b = branch
-	ls-ignored = ls-files --others -i --exclude-standard
+	ls-ignored = ls-files --others -i --exclude-standard --directory
 	rm-deleted = !git diff --name-only --diff-filter=D -z | xargs -0 git rm --cached
 [diff]
 	guitool = kompare
