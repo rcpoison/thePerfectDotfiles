@@ -114,9 +114,9 @@ function __cprompt() {
 		local DIR_COLOR="${bakylw}${bldblk}"
 	fi
 	if [ $UID -eq 0 ]; then
-		export PS1="${txtwht}[\A]${bldwht}[${bldred}\u${bldwht}@${txtylw}\h${bldwht}:${DIR_COLOR}\w${txtrst}${bldwht}]${gitPrompt}${bldred}# ${txtrst}"
+		export PS1="${txtwht}[\A]${bldwht}[${bldred}\u${bldwht}@${txtylw}\h${bldwht}:${DIR_COLOR}\w${txtrst}${bldwht}]${gitPrompt}${bldred}#${txtrst} "
 	else
-		export PS1="${txtwht}[\A]${bldwht}[${txtblu}\u${bldwht}@${txtylw}\h${bldwht}:${DIR_COLOR}\w${txtrst}${bldwht}]${gitPrompt}${txtgrn}\$ ${txtrst}"
+		export PS1="${txtwht}[\A]${bldwht}[${txtblu}\u${bldwht}@${txtylw}\h${bldwht}:${DIR_COLOR}\w${txtrst}${bldwht}]${gitPrompt}${txtgrn}\$${txtrst} "
 	fi
 }
 
@@ -135,7 +135,7 @@ alias ls='ls --color=auto'
 eval $(dircolors -b)
 [ -x /usr/bin/colordiff ] && alias diff='colordiff'
 [ -x /usr/bin/colorsvn ] && alias svn='/usr/bin/colorsvn'
-[ -x ~/lesspipe.sh ] && export LESSOPEN="|~/lesspipe.sh %s"
+#[ -x ~/lesspipe.sh ] && export LESSOPEN="|~/lesspipe.sh %s"
 export LESS=' -R'
 function _less_alias_function () {
 	if [ -x /usr/bin/source-highlight ]; then
@@ -163,7 +163,7 @@ function _less_alias_function () {
 		less "$1"
 	fi
 }
-alias less="_less_alias_function"
+#alias less="_less_alias_function"
 ## other
 alias back='cd -'
 
