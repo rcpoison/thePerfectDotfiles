@@ -5,13 +5,20 @@ if [ -x /usr/bin/pacman-color ]; then
 fi
 
 if [ -x /usr/bin/yaourt ]; then
-	alias pkgup='yaourt -Syu '
+	#alias pkgup='yaourt -Syu '
 	alias pkgf='yaourt -Ss '
 else
-	alias pkgup='pacman -Syu '
+	#alias pkgup='pacman -Syu '
 	alias pkgf='pacman -Ss '
 fi
 
+pkgup() {
+	LC_ALL=C
+	pacman -Sy
+	local CACHEDIR=$(/usr/bin/pacman -v|grep 'Cache Dirs'|grep -Po '[^:]+$')
+	pacman -Sup |grep -P '^(ht|f)tp:'|aria2c --file-allocation=none -Z -s 1 -c -d $CACHEDIR -i -
+	pacman -Su
+}
 
 function rcstart() {
 	local arg
