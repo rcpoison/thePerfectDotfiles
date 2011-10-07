@@ -1,5 +1,6 @@
 [ -z "$PS1" ] && return
 
+export HISTCONTROL=ignoredups:erasedups 
 export HISTSIZE=8192
 export HISTFILESIZE=8192
 
@@ -9,6 +10,7 @@ shopt -s cdspell
 shopt -s hostcomplete
 shopt -s globstar
 shopt -s checkwinsize
+shopt -s histappend
 #shopt -s extglob
 
 
@@ -124,6 +126,8 @@ function __cprompt() {
 function __prompt_command () {
 	__cprompt
 	history -a
+	history -c
+	history -r
 }
 
 export PROMPT_COMMAND='__prompt_command'
