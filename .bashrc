@@ -126,8 +126,8 @@ function __cprompt() {
 function __prompt_command () {
 	__cprompt
 	history -a
-	history -c
-	history -r
+	#history -c
+	#history -r
 }
 
 export PROMPT_COMMAND='__prompt_command'
