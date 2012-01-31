@@ -170,6 +170,10 @@ function _less_alias_function () {
 #alias less="_less_alias_function"
 ## other
 alias back='cd -'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias ~="cd ~"
 
 
 # has stupid extra output
