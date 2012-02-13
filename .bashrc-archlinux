@@ -14,33 +14,7 @@ fi
 
 pkgup() {
 	LC_ALL=C
-	pacman -Sy
 	local CACHEDIR=$(/usr/bin/pacman -v|grep 'Cache Dirs'|grep -Po '[^:]+$')
-	pacman -Sup |grep -P '^(ht|f)tp:'|aria2c --file-allocation=none -Z -s 1 -c -d $CACHEDIR -i -
-	pacman -Su
-}
-
-function rcstart() {
-	local arg
-	for arg in $*; do
-		sudo /etc/rc.d/$arg start
-	done
-}
-function rcstop() {
-	local arg
-	for arg in $*; do
-		sudo /etc/rc.d/$arg stop
-	done
-}
-function rcrestart() {
-	local arg
-	for arg in $*; do
-		sudo /etc/rc.d/$arg restart
-	done
-}
-function rcreload() {
-	local arg
-	for arg in $*; do
-		sudo /etc/rc.d/$arg reload
-	done
+	pacman -Syup |grep -P '^(ht|f)tp:'|aria2c --auto-file-renaming=false --file-allocation=falloc -Z -s 1 -c -d $CACHEDIR -i -
+	pacman -Syu
 }
