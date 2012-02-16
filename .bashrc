@@ -93,13 +93,11 @@ function __cprompt() {
 	local txtrst="\[\033[0m\]"    # Text Reset
 
 
-	local gitPrompt
-	local gitBranch
+	local gitPrompt gitBranch
 	gitBranch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
 	#echo $?
 	if [ $? -eq 0 ]; then
-		local gitClean
-		local gitStaged
+		local gitClean gitStaged
 		# ⚙⩲★⚕
 		git diff --no-ext-diff --quiet --exit-code 2>/dev/null || gitClean="⚡"
 		if git rev-parse --quiet --verify HEAD >/dev/null; then
@@ -108,17 +106,20 @@ function __cprompt() {
 		
 		gitPrompt=" ${txtcyn}[${gitBranch}${bldred}${gitStaged}${bldylw}${gitClean}${txtcyn}]"
 	fi
-	
+	local DIR_COLOR USER_COLOR PROMPT_CHAR
 	if [ -w . ]; then
 		local DIR_COLOR="${bldwht}"
 	else
 		local DIR_COLOR="${bakylw}${bldblk}"
 	fi
 	if [ $UID -eq 0 ]; then
-		export PS1="${txtwht}[\A]${bldwht}[${bldred}\u${bldwht}@${txtylw}\h${bldwht}:${DIR_COLOR}\w${txtrst}${bldwht}]${gitPrompt}${bldred}#${txtrst} "
+		USER_COLOR="${bldred}"
+		PROMPT_CHAR="#"
 	else
-		export PS1="${txtwht}[\A]${bldwht}[${txtblu}\u${bldwht}@${txtylw}\h${bldwht}:${DIR_COLOR}\w${txtrst}${bldwht}]${gitPrompt}${txtgrn}\$${txtrst} "
+		USER_COLOR="${txtblu}"
+		PROMPT_CHAR="#"
 	fi
+	export PS1="${txtwht}[\A]${bldwht}[${USER_COLOR}\u${bldwht}@${txtylw}\h${bldwht}:${DIR_COLOR}\w${txtrst}${bldwht}]${gitPrompt}${txtgrn}${PROMPT_CHAR}${txtrst} "
 }
 
 
