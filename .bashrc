@@ -259,7 +259,7 @@ function jbm() {
 		return
 	fi
 	local lresult
-	mapfile -t lresult < <(grep -e "$1"< ~/.bmdir)
+	mapfile -t lresult < <(grep -i -e "$1"< ~/.bmdir)
 	dirselect lresult[@]
 }
 
