@@ -1,0 +1,13 @@
+thePerfectDotfiles
+  https://github.com/rcpoison/thePerfectDotfiles
+
+Adds color where possible, a nice prompt and a few functions:
+
+ldir <name>
+  locate directory
+
+bmdir <name>
+  bookmark directory
+
+jbm <name>
+  jump to directoy
