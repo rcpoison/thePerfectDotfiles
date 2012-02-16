@@ -260,5 +260,9 @@ function sprunge() {
 
 
 [ -f /etc/arch-release ] && . ~/.bashrc-archlinux
-[ -f ~/git-completion.bash ] && . ~/git-completion.bash
+if [ -f ~/git-completion.bash ]; then
+	. ~/git-completion.bash
+elif [ -f /usr/share/git/completion/git-completion.bash ]; then
+	. /usr/share/git/completion/git-completion.bash
+fi
 
