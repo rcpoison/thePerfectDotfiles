@@ -106,20 +106,26 @@ function __cprompt() {
 		
 		gitPrompt=" ${txtcyn}[${gitBranch}${bldred}${gitStaged}${bldylw}${gitClean}${txtcyn}]"
 	fi
-	local DIR_COLOR USER_COLOR PROMPT_CHAR PROMPT_CHAR_COLOR
+	local SEP_COLOR DIR_COLOR USER_COLOR HOST_COLOR PROMPT_CHAR PROMPT_CHAR_COLOR
 	if [ -w . ]; then
 		local DIR_COLOR="${bldwht}"
 	else
 		local DIR_COLOR="${bakylw}${bldblk}"
 	fi
+	
 	if [ $UID -eq 0 ]; then
 		USER_COLOR="${bldred}"
 		PROMPT_CHAR="#"
 	else
 		USER_COLOR="${txtblu}"
 		PROMPT_CHAR="\$"
+		PROMPT_CHAR_COLOR="${txtgrn}"
 	fi
-	export PS1="${txtwht}[\A]${bldwht}[${USER_COLOR}\u${bldwht}@${txtylw}\h${bldwht}:${DIR_COLOR}\w${txtrst}${bldwht}]${gitPrompt}${txtgrn}${USER_COLOR}${PROMPT_CHAR}${txtrst} "
+	HOST_COLOR="${txtylw}"
+	SEP_COLOR="${txtrst}${bldwht}"
+	TIME_COLOR="${txtwht}"
+	[ -z "$PROMPT_CHAR_COLOR" ] && PROMPT_CHAR_COLOR="$USER_COLOR"
+	export PS1="${TIME_COLOR}[\A]${SEP_COLOR}[${USER_COLOR}\u${SEP_COLOR}@${HOST_COLOR}\h${SEP_COLOR}:${DIR_COLOR}\w${SEP_COLOR}]${gitPrompt}${PROMPT_CHAR_COLOR}${PROMPT_CHAR}${txtrst} "
 }
 
 
