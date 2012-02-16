@@ -15,8 +15,7 @@ shopt -s histappend
 
 
 if [ -x /usr/bin/cowsay ]; then
-	# cowsay <<< "bad formatting"
-	fortune -a # | /usr/bin/cowsay -f tux -W $(($COLUMNS - 16))
+	fortune -a  | /usr/bin/cowsay -n -f tux -W $(($COLUMNS - 16))
 else
 	fortune -a
 fi
