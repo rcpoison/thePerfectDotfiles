@@ -14,8 +14,8 @@ shopt -s histappend
 #shopt -s extglob
 
 
-if [ -x /usr/bin/cowsay ]; then
-	fortune -a  | /usr/bin/cowsay -n -f tux -W $(($COLUMNS - 16))
+if hash cowsay &>/dev/null; then
+	fortune -a  | cowsay -n -f tux -W $(($COLUMNS - 16))
 else
 	fortune -a
 fi
@@ -136,8 +136,8 @@ export PROMPT_COMMAND='__prompt_command'
 alias grep='grep --color=auto'
 alias ls='ls --color=auto'
 eval $(dircolors -b)
-[ -x /usr/bin/colordiff ] && alias diff='colordiff'
-[ -x /usr/bin/colorsvn ] && alias svn='/usr/bin/colorsvn'
+hash colordiff &>/dev/null && alias diff='colordiff'
+hash colorsvn &>/dev/null && alias svn='colorsvn'
 #[ -x ~/lesspipe.sh ] && export LESSOPEN="|~/lesspipe.sh %s"
 export LESS=' -R'
 function _less_alias_function () {
@@ -173,15 +173,6 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias ~="cd ~"
-
-
-# has stupid extra output
-#if [ -x /usr/bin/colortail ]; then
-#	alias tail='/usr/bin/colortail '
-#fi
-#if [ -x /usr/bin/colorgcc ]; then
-#	export CC="colorgcc"
-#fi
 
 
 # manpage colors
