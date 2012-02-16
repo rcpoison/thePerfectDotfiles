@@ -106,7 +106,7 @@ function __cprompt() {
 		
 		gitPrompt=" ${txtcyn}[${gitBranch}${bldred}${gitStaged}${bldylw}${gitClean}${txtcyn}]"
 	fi
-	local DIR_COLOR USER_COLOR PROMPT_CHAR
+	local DIR_COLOR USER_COLOR PROMPT_CHAR PROMPT_CHAR_COLOR
 	if [ -w . ]; then
 		local DIR_COLOR="${bldwht}"
 	else
@@ -117,9 +117,9 @@ function __cprompt() {
 		PROMPT_CHAR="#"
 	else
 		USER_COLOR="${txtblu}"
-		PROMPT_CHAR="#"
+		PROMPT_CHAR="\$"
 	fi
-	export PS1="${txtwht}[\A]${bldwht}[${USER_COLOR}\u${bldwht}@${txtylw}\h${bldwht}:${DIR_COLOR}\w${txtrst}${bldwht}]${gitPrompt}${txtgrn}${PROMPT_CHAR}${txtrst} "
+	export PS1="${txtwht}[\A]${bldwht}[${USER_COLOR}\u${bldwht}@${txtylw}\h${bldwht}:${DIR_COLOR}\w${txtrst}${bldwht}]${gitPrompt}${txtgrn}${USER_COLOR}${PROMPT_CHAR}${txtrst} "
 }
 
 
