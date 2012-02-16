@@ -216,12 +216,14 @@ function bmdir() {
 		dir="$1"
 	fi
 	local edir
-	while read -r edir; do
-		if [ "$dir" == "$edir" ]; then
-			echo "already bookmarked"
-			return
-		fi
-	done < ~/.bmdir
+	if [ -f ~/.bmdir ]; then
+		while read -r edir; do
+			if [ "$dir" == "$edir" ]; then
+				echo "already bookmarked"
+				return
+			fi
+		done < ~/.bmdir
+	fi
 	echo "$dir">>~/.bmdir
 }
 
