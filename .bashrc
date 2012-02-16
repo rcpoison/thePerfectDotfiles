@@ -232,6 +232,7 @@ function dirselect() {
 	fi
 }
 
+#jump to located dir
 function ldir() {
 	if [ -z "$1" ]; then
 		return
@@ -249,6 +250,13 @@ function bmdir() {
 	else
 		dir="$1"
 	fi
+	local edir
+	while read -r edir; do
+		if [ "$dir" == "$edir" ]; then
+			echo "already bookmarked"
+			return
+		fi
+	done < ~/.bmdir
 	echo "$dir">>~/.bmdir
 }
 
