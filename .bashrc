@@ -207,21 +207,20 @@ function cs() {
 	ls
 }
 
-function ldir () {
-	if [ -z "$1" ]; then
-		return
-	fi
+function dirselect() {
+	local possibleDirs
+	declare -a possibleDirs=("${!1}")
 	local i
 	local dir
 	local dirs=()
 	let i=0
-	while read dir; do
+	for dir in "${possibleDirs[@]}"; do
 		if [ -d "$dir" ] && [ -x "$dir" ]; then
 			echo -e "$bldwht[$bldred${i}$bldwht]$txtrst $dir"
 			dirs[$i]="$dir"
 			let i++
 		fi
-	done < <(locate -b -e -q "$1"|grep -Pv '\/\.'| sort)
+	done
 	if [ ${#dirs[*]} -eq 1 ]; then
 		cs "${dirs[0]}"
 	elif [ ${#dirs[*]} -gt 1 ]; then
@@ -232,6 +231,36 @@ function ldir () {
 			cs "${dirs[$sel]}"
 		fi
 	fi
+}
+
+function ldir() {
+	if [ -z "$1" ]; then
+		return
+	fi
+	local lresult
+	mapfile -t lresult < <(locate -b -e -q -- "$1"|grep -Pv '\/\.'|sort)
+	dirselect lresult[@]
+}
+
+# bookmark directory
+function bmdir() {
+	local dir
+	if [ -z "$1" ]; then
+		dir="$PWD"
+	else
+		dir="$1"
+	fi
+	echo "$dir">>~/.bmdir
+}
+
+#jump to bookmark
+function jbm() {
+	if [ ! -f ~/.bmdir ]; then
+		return
+	fi
+	local lresult
+	mapfile -t lresult < <(grep -e "$1"< ~/.bmdir)
+	dirselect lresult[@]
 }
 
 #function spam() {
