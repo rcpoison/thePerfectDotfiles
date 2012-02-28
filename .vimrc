@@ -11,4 +11,4 @@ set wildmode=list:longest
 set cursorcolumn
 set cursorline
 set number
-
+set paste
