@@ -11,6 +11,7 @@ shopt -s hostcomplete
 shopt -s globstar
 shopt -s checkwinsize
 shopt -s histappend
+shopt -s autocd
 #shopt -s extglob
 
 
@@ -150,10 +151,8 @@ export LESS=' -R'
 
 ## other
 alias back='cd -'
-alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
-alias ~="cd ~"
 
 
 # manpage colors
