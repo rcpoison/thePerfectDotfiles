@@ -154,6 +154,8 @@ alias back='cd -'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 
+hash aria2c &>/dev/null && alias dl='aria2c --auto-file-renaming=false --file-allocation=falloc -Z -s 1 -c'
+
 
 # manpage colors
 export LESS_TERMCAP_mb=$(printf "$bldwht")
