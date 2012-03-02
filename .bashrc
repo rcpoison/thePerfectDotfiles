@@ -15,11 +15,8 @@ shopt -s autocd
 #shopt -s extglob
 
 
-if hash cowsay &>/dev/null; then
-	fortune -a  | cowsay -n -f tux -W $(($COLUMNS - 16))
-else
-	fortune -a
-fi
+hash fortune &>/dev/null && fortune -a
+
 
 #export PS1='\[\033[0;31m\][\A]\[\033[0;m\][\[\033[0;34m\]\u\[\033[0m\]@\[\033[0;33m\]\h\[\033[0;m\]:\w]\[\033[0;32m\]\$ \[\033[0m\]'
 export txtblk='\e[0;30m' # Black - Regular
